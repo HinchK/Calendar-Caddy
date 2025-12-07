@@ -1,0 +1,53 @@
+/node_modules
+/vendor
+/public/build
+/storage/*.key
+/.env
+/.phpunit.result.cache
+/.fleet
+
+# Mac
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Linux
+.directory
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# PHPStorm
+.idea/
+.project
+.workspace
+
+# VSCode
+.vscode/
+
+# Livewire
+/public/livewire
+
+# Laravel Vapor
+/vapor-build
+/vapor-meta
+
+# Laravel Nova
+/nova-components/*/vendor
+/nova-components/*/node_modules
+
+# Misc
+npm-debug.log
+yarn-error.log
+.env.*.local
+.env.local
+.env.testing
+.env.staging
+.env.production
+.env.development
+.env.test
+
+# Boost
+.gemini/
