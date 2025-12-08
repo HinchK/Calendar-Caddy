@@ -5,7 +5,7 @@ use Laravel\Fortify\Features;
 use Livewire\Volt\Volt;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('dashboard');
 })->name('home');
 
 Route::view('dashboard', 'dashboard')
@@ -29,4 +29,9 @@ Route::middleware(['auth'])->group(function () {
             ),
         )
         ->name('two-factor.show');
+
+    // Events
+    Volt::route('events', 'events.index')->name('events.index');
+    Volt::route('calendar', 'events.calendar')->name('events.calendar');
+    Volt::route('events/{event}', 'events.show')->name('events.show');
 });

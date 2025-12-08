@@ -9,14 +9,23 @@ use Livewire\Volt\Component;
 new class extends Component {
     public string $name = '';
     public string $email = '';
+    public string $phone_number = '';
+    public string $hometown = '';
+    public string $nickname = '';
+    public string $bio = '';
 
     /**
      * Mount the component.
      */
     public function mount(): void
     {
-        $this->name = Auth::user()->name;
-        $this->email = Auth::user()->email;
+        $user = Auth::user();
+        $this->name = $user->name;
+        $this->email = $user->email;
+        $this->phone_number = $user->phone_number ?? '';
+        $this->hometown = $user->hometown ?? '';
+        $this->nickname = $user->nickname ?? '';
+        $this->bio = $user->bio ?? '';
     }
 
     /**
@@ -28,7 +37,6 @@ new class extends Component {
 
         $validated = $this->validate([
             'name' => ['required', 'string', 'max:255'],
-
             'email' => [
                 'required',
                 'string',
@@ -37,6 +45,10 @@ new class extends Component {
                 'max:255',
                 Rule::unique(User::class)->ignore($user->id)
             ],
+            'phone_number' => ['nullable', 'string', 'max:255'],
+            'hometown' => ['nullable', 'string', 'max:255'],
+            'nickname' => ['nullable', 'string', 'max:255'],
+            'bio' => ['nullable', 'string'],
         ]);
 
         $user->fill($validated);
@@ -97,6 +109,15 @@ new class extends Component {
                     </div>
                 @endif
             </div>
+
+            <flux:input wire:model="nickname" :label="__('Nickname')" type="text" />
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <flux:input wire:model="phone_number" :label="__('Phone Number')" type="tel" />
+                <flux:input wire:model="hometown" :label="__('Hometown')" type="text" />
+            </div>
+
+            <flux:textarea wire:model="bio" :label="__('Bio')" />
 
             <div class="flex items-center gap-4">
                 <div class="flex items-center justify-end">
